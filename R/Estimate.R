@@ -259,7 +259,6 @@ compare_model_plot<-function(model_list,names){
 
   mergeData<-plyr::ldply(.data = model_list,.fun = Selcet_Sim_Obs,.id="Model")
 
-  names(mergeData)
   p1<-ggplot2::ggplot(data = mergeData)+
     ggplot2::geom_line(aes_(x=~Julian,y=~Sim_SoilWater),size=1)+
     ggplot2::geom_point(aes_(x=~Julian,y=~SoilWater),size=2)+
@@ -273,7 +272,7 @@ compare_model_plot<-function(model_list,names){
   p2<-ggplot2::ggplot(data = mergeData,aes_(x=~SoilWater,y=~Sim_SoilWater))+
     ggplot2::geom_point(size=2)+
     ggplot2::geom_smooth(method = "lm",formula = "y~x",se = F,color="black")+
-    ggpmisc::stat_poly_eq(aes_(label = ~paste(..eq.label.., ..rr.label.., sep = '~~~~')), formula = y ~ x, parse = T) + #添加回归方程和调整R方
+    ggpmisc::stat_poly_eq(aes_(label = ~paste(..eq.label.., ..rr.label.., sep = '~~~~')), formula = y ~ x, parse = T) +
     ggplot2::scale_color_manual(values = c("red","blue","black"))+
     ggplot2::facet_grid(.~Model)+
     ggplot2::labs(x="Measure value (mm)",y="Simnlation value (mm)")+

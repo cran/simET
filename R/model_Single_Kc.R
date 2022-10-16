@@ -237,7 +237,8 @@ Model_single_Kc<-function(data,param){
 
   Kcini<-with(Kcparam_data_stage[["Ini"]],mapply(cal_Kcini_for_SingleKc,Pmean,ET0,tw,type,fw))
   Kcmid<-with(Kcparam_data_stage[["Mid"]],mapply(cal_Kcmid_for_singleKc,RHmine, u2e, Ktable, he))
-  Kcend<-with(Kcparam_data_stage[["End"]],mapply(cal_Kcend_for_singleKc,RHmine, u2e, Ktable, he))#分别复制KC计算函数
+
+  Kcend<-with(Kcparam_data_stage[["End"]],mapply(cal_Kcend_for_singleKc,RHmine, u2e, Ktable, he))
   KcDeve<-rep(NA,time=max(data$Cut))
     #Generate the corresponding number of KcDve
     #according to the number of cuts
@@ -385,8 +386,8 @@ Model_single_Kc<-function(data,param){
     ggplot2::geom_line()+
     ggplot2::geom_point(aes_(x=~Julian,y=~SoilWater))+
     ggplot2::geom_hline(yintercept = Field_capacity,color="blue")+
-    ggplot2::geom_hline(yintercept = Field_capacity-TAW,color="red")+#萎蔫含水量
-    ggplot2::geom_hline(yintercept = TAW*p+(Field_capacity-TAW),color="yellow",linetype=2)+#萎蔫含水量
+    ggplot2::geom_hline(yintercept = Field_capacity-TAW,color="red")+
+    ggplot2::geom_hline(yintercept = TAW*p+(Field_capacity-TAW),color="yellow",linetype=2)+
     ggplot2::labs(x="Julian",y="Soil water (mm)")+
     mytheme
 

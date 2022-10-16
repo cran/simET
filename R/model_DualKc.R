@@ -255,8 +255,9 @@ Model_DualKc<-function(data,param){
   Data2<-within(Data2_pre,{
       Kcb_table<-NA
       Kcb_table[Stage=="Ini"]<-Kini
-      Kcb_table[Stage=="Mid"]<-Kmid#
-      Kcb_table[Stage=="End"]<-Kend#使用标准的
+      Kcb_table[Stage=="Mid"]<-Kmid
+
+      Kcb_table[Stage=="End"]<-Kend
       Cut<-factor(Cut,ordered = T)
       Stage<-factor(Stage,levels = c("Ini","Dev","Mid","End"))
     })
@@ -265,9 +266,9 @@ Model_DualKc<-function(data,param){
   Da<-split(Data2,f=Data2$Stage)# by=c("Ini","Dev","Mid","End")
 
   #Calculate the Kcb of each cut and each stage respectively
-  Kcini<-with(Da[["Ini"]],mapply(function(Kcb_table){return(Kcb_table)}, Kcb_table))# Kcb ini 不调整
+  Kcini<-with(Da[["Ini"]],mapply(function(Kcb_table){return(Kcb_table)}, Kcb_table))
   Kcmid<-with(Da[["Mid"]],mapply(Kcb_adj_for_DualKc,Kcb_table,u2,RHmin,h))
-  Kcend<-with(Da[["End"]],mapply(Kcb_adj_for_DualKc,Kcb_table,u2,RHmin,h))#分别复制KC计算函数
+  Kcend<-with(Da[["End"]],mapply(Kcb_adj_for_DualKc,Kcb_table,u2,RHmin,h))
   KcDeve<-rep(NA,time=max(data$Cut))#Determine how many cuts
   Kc<-c(Kcini,KcDeve,Kcmid,Kcend)#Merge the separately calculated KC values
 
@@ -365,7 +366,7 @@ Model_DualKc<-function(data,param){
     New_data[row,"Dri_start"]<-New_data[row-1,"Dri_end"]
 
     #Calculate the water balance of evaporation layer
-    New_data[row,"Kr"]<-cal_Kr_for_DualKc(TEW=cal_TEW_for_DualKc(FC=FCe,WP=WPe,Ze=Ze),REW=REW,De=New_data[row,"Dei_start"])#Kr是针对表层土壤的；参数：FC,WP.Ze,REW
+    New_data[row,"Kr"]<-cal_Kr_for_DualKc(TEW=cal_TEW_for_DualKc(FC=FCe,WP=WPe,Ze=Ze),REW=REW,De=New_data[row,"Dei_start"])
     New_data[row,"Kc_max"]<-cal_Kc_max_for_DualKc(u2=New_data[row,"Wind"],RHmin=New_data[row,"RHmin"],h=New_data[row,"Height"],Kcb=New_data[row,"Kcb"])
     New_data[row,"fw"]<-ifelse(New_data[row,"Irrigation"]>0&New_data[row,"Precipitation"]<4&New_data[row,"Precipitation"]>=0,New_data[row,"fw_irr"],
                                ifelse(New_data[row,"Irrigation"]>0&New_data[row,"Precipitation"]>4,1,
@@ -376,14 +377,14 @@ Model_DualKc<-function(data,param){
     New_data[row,"few"]<-ifelse(1-New_data[row,"fc"]<=New_data[row,"fw"],1-New_data[row,"fc"],New_data[row,"fw"])
     New_data[row,"Ke"]<-min(New_data[row,"Kr"]*(New_data[row,"Kc_max"]-New_data[row,"Kcb"]),New_data[row,"few"]*New_data[row,"Kc_max"])
     New_data[row,"E_few"]<-(New_data[row,"Ke"]*New_data[row,"ET0"])/New_data[row,"few"]
-      #这句代码好像没有用
+      #
     New_data[row,"DPe"]<-cal_DPe_for_DualKc(P=New_data[row,"Precipitation"],I=New_data[row,"Irrigation"],Dei_start=New_data[row,"Dei_start"],fw=New_data[row,"fw"])
     New_data[row,"E"]<-New_data[row,"Ke"]*New_data[row,"ET0"]
     New_data[row,"Dei_end"]<-cal_Dei_for_DualKc(Dei_start=New_data[row,"Dei_start"],P=New_data[row,"Precipitation"],I=(New_data[row,"Irrigation"]/New_data[row,"fw"]),E=(New_data[row,"E"]/New_data[row,"few"]),Dep=New_data[row,"DPe"],
                                      TEW=cal_TEW_for_DualKc(FC=FCe,WP=WPe,Ze=Ze))
 
     #Calculate the water balance of root layer
-    New_data[row,"Ks"]<-cal_WaterStressCoef(Dr=New_data[row,"Dri_start"], TAW=TAW, p=p)#参数 TAW,p
+    New_data[row,"Ks"]<-cal_WaterStressCoef(Dr=New_data[row,"Dri_start"], TAW=TAW, p=p)
     New_data[row,"Kcb_adj"]<-New_data[row,"Ks"]*New_data[row,"Kcb"]
     New_data[row,"Ta"]<-New_data[row,"Kcb_adj"]*New_data[row,"ET0"]
     New_data[row,"CR"]<-cal_capillaryRise(CR_param[[1]],CR_param[[2]],CR_param[[3]],CR_param[[4]],CR_param[[5]],CR_param[[6]],CR_param[[7]],CR_param[[8]],Dw=New_data[row,"GroundwaterDepth"]-rootDepth,Wa=New_data[row,"Dri_start"],LAI=New_data[row,"LAI"],ETm=(New_data[row,"Kcb"]+New_data[row,"Ke"])*New_data[row,"ET0"])
