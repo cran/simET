@@ -1,10 +1,11 @@
 Package: simET
 Type: Package
-Title: Evapotranspiration Simulation and Soil Water Balance under Field
-Version: 1.0.1
-Date: 2022-09-27
+Title: Tools for Simulation of Evapotranspiration of Field Crops and
+        Soil Water Balance
+Version: 1.0.2
+Date: 2023-07-21
 Authors@R: 
-    c(person("Minguo","Liu",email="liumg@cau.edu.cn",role=c("aut","cre")),
+    c(person("Minguo","Liu",email="liumg15@lzu.edu.cn",role=c("aut","cre")),
       person("Huimin","Yang",email="huimyang@lzu.edu.cn",role=c("dtc","fnd")))
 Description: Supports the calculation of meteorological characteristics in 
       evapotranspiration research and reference crop evapotranspiration, and offers 
@@ -20,10 +21,10 @@ Imports: dplyr, ggplot2, ggpmisc, ggpubr, lubridate, magrittr, plyr,
         rlang, stringr, tidyr
 RoxygenNote: 7.1.2
 NeedsCompilation: no
-Packaged: 2022-10-16 01:28:20 UTC; ymhua
+Packaged: 2023-08-10 08:06:54 UTC; ymhua
 Author: Minguo Liu [aut, cre],
   Huimin Yang [dtc, fnd]
-Maintainer: Minguo Liu <liumg@cau.edu.cn>
+Maintainer: Minguo Liu <liumg15@lzu.edu.cn>
 Depends: R (>= 3.5.0)
 Repository: CRAN
-Date/Publication: 2022-10-16 02:50:05 UTC
+Date/Publication: 2023-08-10 08:20:02 UTC
