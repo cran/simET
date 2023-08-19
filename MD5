@@ -1,4 +1,4 @@
-bccf2a5c6f1d207d722784261b02b834 *DESCRIPTION
+9d5396c06968350bb02ba8fd6a9fe263 *DESCRIPTION
 ae020c1a4c58a5e95286b2c1ab87f225 *NAMESPACE
 6d68067e47719b89ce0c9148af14e6a1 *R/Estimate.R
 72d995754a1eb3fc20191efbb9456b01 *R/calculate_ReferenceEvapotranspiration.R
@@ -10,7 +10,7 @@ f42cbad2e19ca63728e5fb5ac395f772 *R/data.R
 98862c998262bac1594900df43f72579 *R/model_DualKc.R
 b7e8ca2c4a2d710bf51ce665f7cb01b0 *R/model_Shuttleworth_Wallace.R
 f3682fa715b89942e3fa35b882c69e19 *R/model_Single_Kc.R
-65cd37d359345b53ed4d52c184035d53 *R/simET.R
+1b54137d4ae82b40a266122de6d1201b *R/simET-package.R
 b56ff2b193ecba52f9ec7f3b10cca008 *R/utils-pipe.R
 72a8161e9eb62ab351a2a7e681d6b712 *data/FIalfalfa.rda
 1e430137398be1248b959fc1aaf10508 *data/SDIalfalfa.rda
@@ -115,4 +115,4 @@ a55fd32b8574616272f0c3cb6f9b4bce *man/estimate_Rs_from_airTemDiff.Rd
 9e440c27e50268883ef339f5193476e7 *man/estimate_goodnessOfFit.Rd
 fe38ee5e82ec8b4fdb55db2fc549a818 *man/linear_interpolation.Rd
 774d9de8e95aa151215efcd304549d41 *man/pipe.Rd
-9a8d28dd7b6433b75ca338eb84febaaf *man/simET.Rd
+d3928c6a1502a759e5f8832999d3d670 *man/simET-package.Rd
